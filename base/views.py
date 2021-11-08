@@ -79,7 +79,7 @@ def home(request):
 
     room_count = rooms.count()
 
-    room_messages = Messages.objects.filter(Q(room__topic__name__icontains=q)).order_by('-created')
+    room_messages = Messages.objects.filter(Q(room__topic__name__icontains=q)).order_by('-created')[0:5]
 
     context = {'rooms' : rooms, 'topics' : topics, 'room_count' : room_count, 'room_messages' : room_messages} # in {'rooms' : rooms}, 'rooms' - how we want to call it inside the template
     # rooms - variable we are accessing
@@ -207,6 +207,5 @@ def topicsPage(request):
 
 
 def activityPage(request):
-    room_messages = Messages.objects.all()
-    room_messages = room_messages[0:5]
+    room_messages = Messages.objects.all()[0:3]
     return render(request, 'base/activity.html', {'room_messages' : room_messages})
