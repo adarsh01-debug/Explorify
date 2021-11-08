@@ -24,9 +24,15 @@
           </div>
           <div class="profile__about">
             <h3>About</h3>
+            {% if user.bio != None %}
             <p>
               {{ user.bio }}
             </p>
+            {% else %}
+            <p>
+              *{{ user.username }} has no bio (suspicious?)*
+            </p>
+            {% endif %}
           </div>
         </div>
 
